@@ -43,10 +43,6 @@ h1, h2, h3, h4, h5, h6, td, th, button, input, select {
 	padding: calc(.6*var(--un)) calc(.8*var(--un));
 }
 
-article {
-	padding: var(--un);
-}
-
 button {
 	align-items: center;
 	color: inherit;
