@@ -1,7 +1,6 @@
-!function() {
-	const _ = {
-		_defaultHTML: document.getElementById('main').innerHTML,
-
+(function() {
+	// http module ------------------------------------------------------------//
+	const http = {
 		get(path) {
 			return new Promise((resolve, reject) => {
 				let xhr = new XMLHttpRequest();
@@ -22,22 +21,34 @@
 				xhr.open('GET', path, true);
 				xhr.send();
 			});
-		},
-		refresh() {
-			let path = window.location.hash.slice(2);
-
-			if (path) {
-				_.get(path).then((response) => {
-					document.getElementById('main').innerHTML = response;
-				});
-			}
-			else {
-				document.getElementById('main').innerHTML = _._defaultHTML;
-			}
 		}
 	}
 
-	_.refresh();
+	// routing ----------------------------------------------------------------//
+	{
+		let root = document.getElementById('root');
+		
+		function refresh() {
+			let path = window.location.hash.replace(/(\/#\/|#\/|#)/, 'routes/');
 
-	window.onhashchange = _.refresh;
-}();
+			if (!path) {
+				path = 'routes';
+			}
+
+			if (path) {
+				http.get(path).then((response) => {
+					root.innerHTML = response;
+					root.style.opacity = 1;
+				},
+				(error) => {
+					root.innerHTML = error;
+					root.style.opacity = 1;
+				});
+			}
+		}
+
+		refresh();
+
+		window.onhashchange = refresh;
+	}
+})();

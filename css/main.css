@@ -1,16 +1,89 @@
+:root {
+	--un: .75rem;
+}
+
+/* reset ---------------------------------------------------------------------*/
+body, body * {
+	background-color: transparent;
+	border: 0;
+	border-radius: 0;
+	color: inherit;
+	font-size: 100%;
+	font-family: Roboto, Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+	-moz-osx-font-smoothing: grayscale;
+   -webkit-font-smoothing: antialiased;
+}
+
+/* structural ----------------------------------------------------------------*/
+body {
+	display: grid;
+	grid-template-columns: 1fr minmax(0, calc(65*var(--un))) 1fr;
+	gap: var(--un);
+}
+
+header {
+	grid-column: 1 / 4;
+	height: calc(5*var(--un));
+}
+
+main {
+	grid-column: 2 / 3;
+}
+
+p {
+	margin: 1em 0;
+}
+p:first-child {
+	margin-top: 0;
+}
+p:last-child {
+	margin-bottom: 0;
+}
+
+.-row {
+	display: flex;
+	flex-flow: row wrap;
+}
+.-row.-align-c {
+	align-items: center;
+	justify-content: center;
+}
+
+.post-link {
+	display: block;
+	padding: var(--un);
+	margin-bottom: var(--un);
+}
+
+/* visual --------------------------------------------------------------------*/
 body {
 	background-color: #252525;
 	color: #e5e5e5;
 }
 
-header {
-	color: white;
-	height: calc(5*var(--un));
-	font-size: 120%;
-	font-weight: bolder;
+code {
+	font-family: 'Fira Code', sans-serif;
 }
 
-article {
-	max-width: calc(64*var(--un));
-	outline: 1px solid rgba(255, 255, 255, .2);
+header {
+	color: white;
+	font-size: larger;
+	font-weight: bolder;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.3333);
+}
+
+#root {
+	opacity: 0;
+   transition: opacity .25s ease-in-out;
+}
+
+.post-link {
+	border: 1px solid rgba(255, 255, 255, 0.3333);
+	color: white;
+	text-decoration: none;
+}
+.post-link.highlight {
+	border-color: salmon;
 }
