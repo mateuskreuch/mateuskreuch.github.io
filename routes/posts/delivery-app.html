@@ -1,12 +1,92 @@
 <article>
 	<h1>
-		Criando um Progressive Web App com especificações restritas
+		Criando um web app com severas limitações
 	</h1>
 	<hr>
 	<p>
-		Recentemente tive a oportunidade de desenvolver um PWA de delivery com
-		especificações um tanto quanto restritas: a empresa era uma startup no
-		ramo alimentício, que contava com um servidor fraco e ao mesmo tempo
-		esperava grandes quantidades de usuários concomitantes.
+		Recentemente tive a oportunidade de desenvolver um 
+		<abbr title="Progressive Web App">PWA</abbr>
+		de delivery com especificações bastante restritas: a empresa era uma
+		start-up no ramo alimentício, que contava com um servidor fraco e, devido
+		ao seu sistema de pedidos onde o catálogo era atualizado semanalmente e os
+		clientes tinham um prazo curto para pedir, haveria uma grande quantidade
+		de usuários simultâneos.
+	</p>
+	<p>
+		O primeiro passo, então, era decidir a stack de tecnologia do aplicativo.
+		Tive liberdade absoluta para escolher cada detalhe, o que fez o processo
+		ser muito mais fácil. A stack escolhida foi:
+	</p>
+	<table style="margin: auto">
+		<tr>
+			<td>Front-end</td>
+			<td>Vue</td>
+		</tr>
+		<tr>
+			<td>Back-end</td>
+			<td>PHP (sem framework)</td>
+		</tr>
+		<tr>
+			<td>Servidor HTTP</td>
+			<td>Nginx</td>
+		</tr>
+		<tr>
+			<td>Banco de dados</td>
+			<td>MariaDB</td>
+		</tr>
+	</table>
+	<h2>
+		Front-end
+	</h2>
+	<p>
+		Muitas coisas tiveram que ser levadas em conta nessa etapa. Em primeiro
+		lugar, qualquer opção que eu usasse deveria ter uma certa popularidade e
+		boa documentação, pois não seria eu o futuro mantenedor do aplicativo.
+		Portanto, apenas quatro opções foram realmente consideradas: React,
+		Angular, Vue e Preact.
+	</p>
+	<p>
+		Apesar de sua imensa popularidade, React pesa mais do que as outras
+		opções, mesmo tendo menos recursos. Pelo fato do público alvo da empresa
+		estar majoritariamente localizado em lugares com péssima conexão de
+		internet, principalmente 3G, React foi descartado. Angular também foi
+		descartado pela mesma razão.
+	</p>
+	<p>
+		Preact, apesar de muito pequeno e veloz, não tem tanta popularidade e
+		necessita de várias bibliotecas assistentes, o que afetaria seu tamanho.
+		Por fim, Vue tem uma boa popularidade, é fácil de aprender e manter, e tem
+		um tamanho bastante compacto considerando todas suas funcionalidades.
+	</p>
+	<h2>
+		Back-end
+	</h2>
+	<p>
+		A escolha de usar PHP sem nenhum framework como Symfony ou Laravel foi
+		feita pois o aplicativo precisa apenas de um back-end muito mínimo: enviar
+		informações do banco de dados e receber pedidos. Um framework só
+		sobrecarregaria o servidor desnecessariamente. 
+	</p>
+	<p>
+		Para ser ainda mais eficiente, ao invés de executar a rotina de extrair as
+		informações necessárias do banco de dados para cada usuário, tais
+		informações são extraidas em intervalos regulares e armazenadas, e esse
+		arquivo é enviado ao usuário. Isso pode ser feito pois esses dados não
+		mudam com frequência e, quando mudam, não precisam chegar ao usuário
+		instantaneamente.
+	</p>
+	<p>
+		Outras linguagens também foram consideradas, como JavaScript (NodeJS),
+		Python, Ruby, etc. mas no fim nenhuma tinha a flexibilidade do PHP.
+	</p>
+	<h2>
+		Servidor HTTP
+	</h2>
+	<p>
+		Aqui só foram realmente consideradas duas opções: Apache ou Nginx. Apesar
+		de Apache ser um pouco mais popular e mais fácil de usar, Nginx é muito
+		mais eficiente no uso de memória, principalmente com muitos usuários
+		concomitantes que era o cenário esperado nesse aplicativo. Dado as
+		limitações do servidor, Nginx teve preferência.
 	</p>
 </article>

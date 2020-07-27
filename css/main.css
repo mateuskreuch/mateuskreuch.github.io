@@ -22,43 +22,40 @@ body, body * {
 	padding: 0;
 	outline: 0;
 	-moz-osx-font-smoothing: grayscale;
-   -webkit-font-smoothing: antialiased;
+	-webkit-font-smoothing: antialiased;
 }
 
 /* structural ----------------------------------------------------------------*/
 body {
 	display: grid;
 	grid-template-columns: 1fr minmax(0, calc(65*var(--un))) 1fr;
-	gap: var(--un);
+	gap: 0 var(--un);
 }
 
 header {
+	align-items: center;
+	display: flex;
+	flex-flow: row wrap;
 	grid-column: 1 / 4;
 	height: calc(5*var(--un));
+	justify-content: center;
 	white-space: nowrap;
 }
 
-hr {
-	margin: 1em 0;
+h1, h2, h3, h4, h5, h6, hr, p {
+	margin: 1.19rem 0;
 }
 
 main {
 	grid-column: 2 / 3;
 }
 
-p {
-	margin-bottom: 1rem;
-	text-align: justify;
-	hyphens: auto;
+table {
+	border-collapse: collapse;
 }
 
-.-row {
-	display: flex;
-	flex-flow: row wrap;
-}
-.-row.-align-c {
-	align-items: center;
-	justify-content: center;
+td, tr {
+	padding: calc(.6*var(--un)) calc(.8*var(--un));
 }
 
 .github-icon {
@@ -72,7 +69,7 @@ p {
 .post-link {
 	display: block;
 	padding: var(--un);
-	margin-bottom: var(--un);
+	margin: var(--un) 0;
 }
 
 /* visual --------------------------------------------------------------------*/
@@ -85,9 +82,15 @@ code {
 	font-family: 'Fira Code', Courier, monospace;
 }
 
-h1 {
+h1, h2, h3, h4, h5, h6 {
 	color: var(--primary-color);
+}
+
+h1 {
 	font-size: 140%;
+}
+h2 {
+	font-size: 125%;
 }
 
 header {
@@ -101,14 +104,27 @@ hr {
 	border-bottom: 2px solid var(--primary-color);
 }
 
+p {
+	text-align: justify;
+	hyphens: auto;
+}
+
+td, tr {
+	border: 1px solid rgba(255, 255, 255, 0.3333);
+}
+
 #root {
 	opacity: 0;
-   transition: opacity .2s ease-in-out;
+	transition: opacity .2s ease-in-out;
 }
 
 .post-link {
 	border: 1px solid rgba(255, 255, 255, 0.3333);
 	color: var(--text-display-color);
+	transition: background-color .05s ease-in-out;
+}
+.post-link:active {
+	background-color: black;
 }
 .post-link.highlight {
 	border-color: var(--primary-color);
