@@ -1,4 +1,68 @@
 (function() {
+	// custom elements --------------------------------------------------------//
+	{
+		const codeRegex = new RegExp(
+			'('						+
+				'\'.*?\'|'			+ // '' strings
+				'".*?"|'				+ // "" strings
+				'\\btrue\\b|'		+
+				'\\bfalse\\b|'		+
+				'\\b\\d+\\b|'		+ // numbers
+				'\\B[@]\\B'			+ // the @ character
+			')|'						+
+			'(?<=\\w[.])(\\w+)|'	+ // fields
+			'('						+
+				'\\bdef\\b|'		+
+				'\\bif\\b|'			+
+				'\\belse\\b|'		+
+				'\\bfor\\b|'		+
+				'\\band\\b|'		+
+				'\\bor\\b|'			+
+				'\\breturn\\b|'	+
+				'\\B[+]\\B|'		+
+				'\\B[-]\\B|'		+
+				'\\B[/]\\B|'		+
+				'\\B[*]\\B|'		+
+				'\\bclass\\b'		+
+			')|'						+
+			'(#.+)',				  // comment lines
+			'g'
+		);
+
+		const codeFunction = function(_, p1, p2, p3, p4) {
+			if      (p1) { return '<span class="code-data-type">' + p1 + '</span>'; }
+			else if (p2) { return '<span class="code-field">' + p2 + '</span>'; }
+			else if (p3) { return '<span class="code-keyword">' + p3 + '</span>'; }
+			else if (p4) { return '<span class="code-comment">' + p4 + '</span>'; }
+		}
+			
+		class CodeViewer extends HTMLElement {
+			connectedCallback() {
+				let code = this.textContent.replace(/^\s*?\n|\n.+$/g, '')
+													.replace(/\t/g, '   ');
+				
+				try {
+					code = code.replace(
+						new RegExp(
+							'^ {' + 
+								Math.min(...code.match(/^ +/gm).map(({length}) => length)) + 
+							'}',
+							'gm'
+						),
+						''
+					);
+
+					this.classList.add('box');
+				}
+				catch {}
+				
+				this.innerHTML = code.replace(codeRegex, codeFunction);
+			}
+		}
+
+		customElements.define('code-viewer', CodeViewer);
+	}
+
 	// http module ------------------------------------------------------------//
 	const http = {
 		get(path) {
@@ -10,12 +74,12 @@
 						resolve(xhr.response);
 					}
 					else {
-						reject(xhr.statusText);
+						reject(xhr.status);
 					}
 				}
 
 				xhr.onerror = function() {
-					reject(xhr.statusText);
+					reject(xhr.status);
 				}
 
 				xhr.open('GET', path, true);
@@ -41,8 +105,10 @@
 					root.style.opacity = 1;
 				},
 				(error) => {
-					root.innerHTML = error;
-					root.style.opacity = 1;
+					http.get('routes/' + error + '.html').then((response) => {
+						root.innerHTML = response;
+						root.style.opacity = 1;
+					});
 				});
 			}
 		}

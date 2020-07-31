@@ -1,6 +1,7 @@
 :root {
 	--background-color: #252525;
 	--primary-color: #fa8072;
+	--secondary-color: #20b2aa;
 	--text-body-color: #e5e5e5;
 	--text-display-color: #ffffff;
 	--un: .75rem;
@@ -15,6 +16,7 @@ body, body * {
 	background-color: transparent;
 	border: 0;
 	border-radius: 0;
+	box-sizing: border-box;
 	color: inherit;
 	font-size: 100%;
 	font-family: Roboto, Arial, sans-serif;
@@ -25,11 +27,33 @@ body, body * {
 	-webkit-font-smoothing: antialiased;
 }
 
+button {
+	cursor: pointer;
+}
+
+img {
+	display: block;
+}
+
 /* structural ----------------------------------------------------------------*/
 body {
 	display: grid;
 	grid-template-columns: 1fr minmax(0, calc(65*var(--un))) 1fr;
 	gap: 0 var(--un);
+}
+
+button, td, tr {
+	padding: calc(.6*var(--un)) calc(.8*var(--un));
+}
+
+code-viewer {
+	padding: 0 calc(0.3*var(--un));
+	white-space: pre-wrap;
+}
+
+footer {
+	grid-column: 1 / 4;
+	margin-top: calc(20*var(--un));
 }
 
 header {
@@ -54,21 +78,17 @@ table {
 	border-collapse: collapse;
 }
 
-td, tr {
-	padding: calc(.6*var(--un)) calc(.8*var(--un));
+.box {
+	display: block;
+	padding: var(--un);
 }
 
 .github-icon {
 	position: absolute;
 	left: var(--un);
 }
-.github-icon > * {
-	display: block;
-}
 
 .post-link {
-	display: block;
-	padding: var(--un);
 	margin: var(--un) 0;
 }
 
@@ -78,8 +98,14 @@ body {
 	color: var(--text-body-color);
 }
 
-code {
+code-viewer {
+	font-size: 90%;
+}
+code-viewer, code-viewer > * {
 	font-family: 'Fira Code', Courier, monospace;
+}
+code-viewer, .box {
+	border: 1px solid rgba(255, 255, 255, 0.3333);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -105,8 +131,8 @@ hr {
 }
 
 p {
-	text-align: justify;
 	hyphens: auto;
+	text-align: justify;
 }
 
 td, tr {
@@ -118,14 +144,23 @@ td, tr {
 	transition: opacity .2s ease-in-out;
 }
 
+.code-keyword {
+	color: var(--secondary-color);
+}
+.code-data-type {
+	color: var(--primary-color);
+}
+.code-comment {
+	color: gray;
+}
+.code-field {
+	color: wheat;
+}
+
 .post-link {
-	border: 1px solid rgba(255, 255, 255, 0.3333);
 	color: var(--text-display-color);
 	transition: background-color .05s ease-in-out;
 }
 .post-link:active {
 	background-color: black;
-}
-.post-link.highlight {
-	border-color: var(--primary-color);
 }

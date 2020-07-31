@@ -1,21 +1,14 @@
 <article>
 	<h1>
-		Criando um web app com severas limitações
+		Criando um web app pequeno e eficiente
 	</h1>
 	<hr>
 	<p>
-		Recentemente tive a oportunidade de desenvolver um 
-		<abbr title="Progressive Web App">PWA</abbr>
-		de delivery com especificações bastante restritas: a empresa era uma
-		start-up no ramo alimentício, que contava com um servidor fraco e, devido
-		ao seu sistema de pedidos onde o catálogo era atualizado semanalmente e os
-		clientes tinham um prazo curto para pedir, haveria uma grande quantidade
-		de usuários simultâneos.
-	</p>
-	<p>
-		O primeiro passo, então, era decidir a stack de tecnologia do aplicativo.
-		Tive liberdade absoluta para escolher cada detalhe, o que fez o processo
-		ser muito mais fácil. A stack escolhida foi:
+		Recentemente tive a oportunidade de desenvolver um PWA para uma start-up
+		no ramo alimentício. Se tratava de um aplicativo de entrega que rodaria
+		em um servidor comicamente fraco e que, ao mesmo tempo, teria grandes
+		volumes de usuários concomitantes, pois o catálogo ficava aberto durante
+		um único dia e os usuários só tinham esse prazo para pedir.
 	</p>
 	<table style="margin: auto">
 		<tr>
@@ -35,6 +28,11 @@
 			<td>MariaDB</td>
 		</tr>
 	</table>
+	<p>
+		Acima está as tecnologias mais importantes que foram usadas. Certamente
+		essas escolhas são... questionáveis. No entanto, esse aplicativo não era
+		comum. Deixe-me explicar minhas decisões:
+	</p>
 	<h2>
 		Front-end
 	</h2>
@@ -62,31 +60,49 @@
 		Back-end
 	</h2>
 	<p>
-		A escolha de usar PHP sem nenhum framework como Symfony ou Laravel foi
-		feita pois o aplicativo precisa apenas de um back-end muito mínimo: enviar
-		informações do banco de dados e receber pedidos. Um framework só
-		sobrecarregaria o servidor desnecessariamente. 
+		A escolha de usar PHP sem nenhum framework como Symfony ou Laravel, ou até
+		mesmo um micro-framework como Slim, foi feita pois o aplicativo precisaria
+		apenas de um back-end muito mínimo: enviar informações do banco de dados e
+		receber pedidos. Qualquer coisa a mais daria ao nosso patético servidor
+		uma carga desnecessária.
 	</p>
 	<p>
 		Para ser ainda mais eficiente, ao invés de executar a rotina de extrair as
-		informações necessárias do banco de dados para cada usuário, tais
-		informações são extraidas em intervalos regulares e armazenadas, e esse
-		arquivo é enviado ao usuário. Isso pode ser feito pois esses dados não
-		mudam com frequência e, quando mudam, não precisam chegar ao usuário
-		instantaneamente.
+		informações necessárias do banco de dados para cada visitante, tais
+		informações são extraídas em intervalos regulares e armazenadas, sendo
+		esse arquivo então enviado ao usuário. Isso pode ser feito pois esses
+		dados não mudam com frequência e, quando mudam, não precisam chegar ao
+		usuário instantaneamente.
 	</p>
 	<p>
-		Outras linguagens também foram consideradas, como JavaScript (NodeJS),
-		Python, Ruby, etc. mas no fim nenhuma tinha a flexibilidade do PHP.
+		É claro que outras linguagens, como JavaScript, Python, Ruby, etc. também
+		foram consideradas, mas no fim nenhuma tinha a flexibilidade do PHP.
 	</p>
 	<h2>
 		Servidor HTTP
 	</h2>
 	<p>
-		Aqui só foram realmente consideradas duas opções: Apache ou Nginx. Apesar
-		de Apache ser um pouco mais popular e mais fácil de usar, Nginx é muito
-		mais eficiente no uso de memória, principalmente com muitos usuários
-		concomitantes que era o cenário esperado nesse aplicativo. Dado as
-		limitações do servidor, Nginx teve preferência.
+		Apesar de existirem milhares de tecnologias nessa classe, apenas duas se
+		destacam, ainda mais para uma start-up: Apache e Nginx. Apache é um pouco
+		mais fácil de ser utilizado, talvez por sua maior popularidade, mas Nginx
+		é muito mais eficiente no seu uso de memória RAM, principalmente com
+		muitos usuários simultâneos, que era o cenário esperado.
+	</p>
+	<h2>
+		Banco de dados
+	</h2>
+	<p>
+		Confesso que esse aplicativo em particular se beneficiaria com um banco de
+		dados NoSQL, dado sua maior flexibilidade no formato de dados armazenados.
+		Essa decisão, no entanto, estava fora do meu poder, já que a start-up a
+		havia tomado por mim.
+	</p>
+	<h2>
+		Por fim
+	</h2>
+	<p>
+		Apesar do cansaço que é trabalhar com uma start-up (principalmente uma que
+		não é do ramo de tecnologia), desenvolver e ver aquilo que foi
+		desenvolvido rodar em um ambiente inóspito é certamente gratificante.
 	</p>
 </article>
