@@ -12,13 +12,18 @@
 			')|'						+
 			'(?<=\\w[.])(\\w+)|'	+ // fields
 			'('						+
-				'\\bdef\\b|'		+
+				'\\bfunction\\b|'	+
+				'\\bgoto\\b|'		+
+				'\\blabel\\b|'		+
+				'\\bvar\\b|'		+
 				'\\bif\\b|'			+
 				'\\belse\\b|'		+
+				'\\bthen\\b|'		+
 				'\\bfor\\b|'		+
 				'\\band\\b|'		+
 				'\\bor\\b|'			+
 				'\\breturn\\b|'	+
+				'\\bend\\b|'		+
 				'\\B[+]\\B|'		+
 				'\\B[-]\\B|'		+
 				'\\B[/]\\B|'		+
@@ -42,6 +47,7 @@
 													.replace(/\t/g, '   ');
 				
 				try {
+					// remove extra indentation
 					code = code.replace(
 						new RegExp(
 							'^ {' + 

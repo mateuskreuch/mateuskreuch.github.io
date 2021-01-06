@@ -104,9 +104,6 @@ code-viewer {
 code-viewer, code-viewer > * {
 	font-family: 'Fira Code', Courier, monospace;
 }
-code-viewer, .box {
-	border: 1px solid rgba(255, 255, 255, 0.3333);
-}
 
 h1, h2, h3, h4, h5, h6 {
 	color: var(--primary-color);
@@ -155,6 +152,10 @@ td, tr {
 }
 .code-field {
 	color: wheat;
+}
+
+.box {
+	border: 1px solid rgba(255, 255, 255, 0.3333);
 }
 
 .post-link {
