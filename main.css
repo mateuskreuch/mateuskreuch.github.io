@@ -1,0 +1,9 @@
+tab {
+   padding-left: 2em;
+}
+
+h3 {
+   border-bottom: 4px double gray;
+   border-top: 4px double gray;
+   padding: 10px 0;
+}
