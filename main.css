@@ -1,9 +1,59 @@
-tab {
-   padding-left: 2em;
+body {
+   font-family: 'Fira Code', 'Courier New', Courier, monospace;
+   min-width: 320px;
+   margin: 0.2em;
 }
 
-h3 {
-   border-bottom: 4px double gray;
-   border-top: 4px double gray;
-   padding: 10px 0;
+p {
+   text-align: justify;
+}
+
+.grid {
+   align-content: flex-start;
+   display: flex;
+   flex-flow: row wrap;
+}
+
+.g {
+   display: inline-block;
+   letter-spacing: normal;
+   text-rendering: auto;
+   vertical-align: top;
+   word-spacing: normal;
+}
+
+.g-grow {
+   flex-grow: 1;
+}
+
+.g-max-lg {
+   width: 700px;
+}
+
+.txt-right {
+   text-align: right;
+}
+
+.panel {
+   padding: 1em;
+   border: 1px solid #111;
+}
+
+.h-padding {
+   padding-left: 1em;
+   padding-right: 1em;
+}
+
+.t-margin {
+   margin-top: 1em;
+}
+
+@media screen and (max-width: 750px) {
+   .g-max-lg {
+      width: 100%;
+   }
+
+   .hide-sm {
+      display: none !important;
+   }
 }
